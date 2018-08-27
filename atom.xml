@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Javmain&#39;s Wiki</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://wiki.51itzone.cn/"/>
+  <updated>2018-08-20T11:10:30.351Z</updated>
+  <id>https://wiki.51itzone.cn/</id>
+  
+  <author>
+    <name>Javmain</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RabbitMQ 详解</title>
+    <link href="https://wiki.51itzone.cn/wiki/DistributedSystem/Rabbitmq/rabbitmq/"/>
+    <id>https://wiki.51itzone.cn/wiki/DistributedSystem/Rabbitmq/rabbitmq/</id>
+    <published>2018-08-20T02:25:16.296Z</published>
+    <updated>2018-08-20T11:10:30.351Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="channel-参数详解"><a href="#channel-参数详解" class="headerlink" title="channel 参数详解"></a>channel 参数详解</h1><h2 id="basicPublish-方法"><a href="#basicPublish-方法" class="headerlink" title="basicPublish 方法"></a>basicPublish 方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Publish a message.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * Publishing to a non-existent exchange will result in a channel-level</span></span><br><span class="line"><span class="comment">     * protocol exception, which closes the channel.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * Invocations of &lt;code&gt;Channel#basicPublish&lt;/code&gt; will eventually block if a</span></span><br><span class="line"><span class="comment">     * &lt;a href="http://www.rabbitmq.com/alarms.html"&gt;resource-driven alarm&lt;/a&gt; is in effect.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@see</span> com.rabbitmq.client.AMQP.Basic.Publish</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@see</span> &lt;a href="http://www.rabbitmq.com/alarms.html"&gt;Resource-driven alarms&lt;/a&gt;.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> exchange the exchange to publish the message to</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> routingKey the routing key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mandatory true if the 'mandatory' flag is to be set</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> immediate true if the 'immediate' flag is to be</span></span><br><span class="line"><span class="comment">     * set. Note that the RabbitMQ server does not support this flag.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> props other properties for the message - routing headers etc</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> body the message body</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> java.io.IOException if an error is encountered</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">basicPublish</span><span class="params">(String exchange, String routingKey, <span class="keyword">boolean</span> mandatory, <span class="keyword">boolean</span> immediate, BasicProperties props, <span class="keyword">byte</span>[] body)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> IOException</span>;</span><br></pre></td></tr></table></figure><h2 id="basicAck"><a href="#basicAck" class="headerlink" title="basicAck"></a>basicAck</h2><p>deliveryTag: 该消息的index<br>multiple：是否批量.<br>true: 将一次性 ack 所有小于 deliveryTag 的消息。</p><h2 id="basicNack"><a href="#basicNack" class="headerlink" title="basicNack"></a>basicNack</h2><p>channel.basicNack(delivery.getEnvelope().getDeliveryTag(), false, true);</p><p>deliveryTag: 该消息的 index<br>multiple：是否批量.<br>true: 将一次性拒绝所有小于 deliveryTag 的消息。<br>requeue：被拒绝的是否重新入队列</p><h2 id="basicReject"><a href="#basicReject" class="headerlink" title="basicReject"></a>basicReject</h2><p>channel.basicReject(delivery.getEnvelope().getDeliveryTag(), false);</p><p>deliveryTag: 该消息的 index<br>requeue：被拒绝的是否重新入队列</p><p>channel.basicNack 与 channel.basicReject 的区别：</p><blockquote><p>basicNack可以拒绝多条消息，而basicReject一次只能拒绝一条消息</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;channel-参数详解&quot;&gt;&lt;a href=&quot;#channel-参数详解&quot; class=&quot;headerlink&quot; title=&quot;channel 参数详解&quot;&gt;&lt;/a&gt;channel 参数详解&lt;/h1&gt;&lt;h2 id=&quot;basicPublish-方法&quot;&gt;&lt;a href=
+      
+    
+    </summary>
+    
+      <category term="DistributedSystem" scheme="https://wiki.51itzone.cn/categories/DistributedSystem/"/>
+    
+      <category term="Rabbitmq" scheme="https://wiki.51itzone.cn/categories/DistributedSystem/Rabbitmq/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Python 基础</title>
+    <link href="https://wiki.51itzone.cn/wiki/ProgrammingLanguage/Python/python_learn/"/>
+    <id>https://wiki.51itzone.cn/wiki/ProgrammingLanguage/Python/python_learn/</id>
+    <published>2018-08-20T02:17:49.260Z</published>
+    <updated>2018-08-20T02:17:49.260Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="什么是-Python-解释器？"><a href="#什么是-Python-解释器？" class="headerlink" title="什么是 Python 解释器？"></a>什么是 Python 解释器？</h1><p>Python 解析器提供了程序的运行环。Python 是解析执行的，与C/C++之类的编译性语言编写的程序类比，Python 源码不需要从源文件转换成计算机使用的机器语言，也不需要经过连接器链接之后形成二进制可执行文件。当我们运行 Python 程序的时候，Python 解析器将源码转换为字节码，然后再由 Python 解析器来执行这些<a href="https://zh.wikipedia.org/wiki/%E5%AD%97%E8%8A%82%E7%A0%81" rel="external nofollow noopener noreferrer" target="_blank">字节码</a>。但是，Python 程序每次运行都需要转换成字节码，然后再由虚拟机把字节码转换成机器语言，最后才能在硬件上运行。与编译性语言相比，每次多出了编译和链接的过程，性能会受到一定的影响。</p><p>官方版本的解释器：CPython。这个解释器是用C语言开发的，所以叫CPython。在命令行下运行 python 命令就是启动 CPython 解释器。</p><h1 id="什么是编译型语言和解释型语言"><a href="#什么是编译型语言和解释型语言" class="headerlink" title="什么是编译型语言和解释型语言"></a>什么是编译型语言和解释型语言</h1><ul><li><p><strong>编译型语言</strong>实现的，如：C、C++、Fortran、Pascal、Ada。由编译型语言编写的源程序需要经过<strong>编译</strong>,<strong>汇编</strong>和<strong>链接</strong>才能输出目标代码，然后由机器加载到内存中执行目标代码。目标代码是有机器指令组成，不能独立运行，因为源程序中可能使用了一些汇编程序不能解释引用的库函数，而库函数又不在源程序中，此时还需要链接程序完成外部引用和目标模板调用的链接任务，最后才能输出可执行代码。</p></li><li><p><strong>解释型语言</strong>，解释器不产生目标机器代码，而是产生<strong>中间代码</strong>，这种中间代码与机器代码不同，中间代码的解释是由软件支持的，不能直接使用在硬件上。该软件解释器通常会导致执行效率较低，用解释型语言编写的程序是由另一个可以理解中间代码的解释程序执行的。和编译的程序不同的是, 解释程序的任务是逐一将源代码的语句解释成可执行的机器指令，不需要将源程序翻译成目标代码再执行。对于解释型语言，需要一个专门的解释器来执行该程序， 每条语句只有在执行是才能被翻译，这种解释型语言每执行一次就翻译一次，因而效率低下。</p></li><li><p>Java 解释器，也称 <a href="https://zh.wikipedia.org/wiki/Java%E8%99%9A%E6%8B%9F%E6%9C%BA" rel="external nofollow noopener noreferrer" target="_blank">Java 虚拟机</a>, Java 程序是需要编译的，但是没有直接编译成机器语言，而是编译成字节码， 然后在 Java 虚拟机上用解释的方式执行 <a href="https://zh.wikipedia.org/wiki/Java%E5%AD%97%E8%8A%82%E7%A0%81" rel="external nofollow noopener noreferrer" target="_blank">Java 字节码</a>。Python 也使用了类似的方式，先将 Python 编译成 Python 字节码，然后由一个专门的 Python 字节码解释器负责解释执行字节码。</p></li><li><p>Python 是一门解释语言，但是出于效率的考虑，提供了一种编译的方法。编译之后就得到 pyc 文件，存储了字节码。Python 这点和 Java 很类似，但是Java 与 Python 不同的是，Python 是一个解释型的语言，所以编译字节码不是一个强制的操作，事实上，编译是一个自动的过程，一般不会在意它的存在。编译成字节码可以节省加载模块的时间，提高效率。</p></li></ul><p><img src="Java_virtual_machine_architecture.png" alt="Java 虚拟机概貌(图片来源维基百科)"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;什么是-Python-解释器？&quot;&gt;&lt;a href=&quot;#什么是-Python-解释器？&quot; class=&quot;headerlink&quot; title=&quot;什么是 Python 解释器？&quot;&gt;&lt;/a&gt;什么是 Python 解释器？&lt;/h1&gt;&lt;p&gt;Python 解析器提供了程序的运行
+      
+    
+    </summary>
+    
+      <category term="ProgrammingLanguage" scheme="https://wiki.51itzone.cn/categories/ProgrammingLanguage/"/>
+    
+      <category term="Python" scheme="https://wiki.51itzone.cn/categories/ProgrammingLanguage/Python/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>栈和队列</title>
+    <link href="https://wiki.51itzone.cn/wiki/Algorithm/DataStructure/stcak-and-queue/"/>
+    <id>https://wiki.51itzone.cn/wiki/Algorithm/DataStructure/stcak-and-queue/</id>
+    <published>2018-08-20T02:17:49.259Z</published>
+    <updated>2018-08-20T02:17:49.259Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h1><h1 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;栈&quot;&gt;&lt;a href=&quot;#栈&quot; class=&quot;headerlink&quot; title=&quot;栈&quot;&gt;&lt;/a&gt;栈&lt;/h1&gt;&lt;h1 id=&quot;队列&quot;&gt;&lt;a href=&quot;#队列&quot; class=&quot;headerlink&quot; title=&quot;队列&quot;&gt;&lt;/a&gt;队列&lt;/h1&gt;
+      
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="https://wiki.51itzone.cn/categories/Algorithm/"/>
+    
+      <category term="DataStructure" scheme="https://wiki.51itzone.cn/categories/Algorithm/DataStructure/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构基本概念</title>
+    <link href="https://wiki.51itzone.cn/wiki/Algorithm/DataStructure/data-structure/"/>
+    <id>https://wiki.51itzone.cn/wiki/Algorithm/DataStructure/data-structure/</id>
+    <published>2018-08-20T02:17:49.258Z</published>
+    <updated>2018-08-20T02:17:49.259Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="什么是数据结构"><a href="#什么是数据结构" class="headerlink" title="什么是数据结构"></a>什么是数据结构</h1><p>在计算机科学中，数据结构（data structure）是表示计算机中存储、组织数据的方式，逻辑结构和物理存储结构。</p><p>解决问题方法的效率：</p><ul><li>跟数据的组织方式有关</li><li>跟空间的利用效率有关</li><li>跟算法的巧妙程度有关</li></ul><h1 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h1><h1 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;什么是数据结构&quot;&gt;&lt;a href=&quot;#什么是数据结构&quot; class=&quot;headerlink&quot; title=&quot;什么是数据结构&quot;&gt;&lt;/a&gt;什么是数据结构&lt;/h1&gt;&lt;p&gt;在计算机科学中，数据结构（data structure）是表示计算机中存储、组织数据的方式，逻辑结构
+      
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="https://wiki.51itzone.cn/categories/Algorithm/"/>
+    
+      <category term="DataStructure" scheme="https://wiki.51itzone.cn/categories/Algorithm/DataStructure/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://wiki.51itzone.cn/wiki/BigData/Kafka/kafka/"/>
+    <id>https://wiki.51itzone.cn/wiki/BigData/Kafka/kafka/</id>
+    <published>2018-08-20T02:17:49.257Z</published>
+    <updated>2018-08-20T11:20:20.684Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="BigData" scheme="https://wiki.51itzone.cn/categories/BigData/"/>
+    
+      <category term="Kafka" scheme="https://wiki.51itzone.cn/categories/BigData/Kafka/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Welcome Javmain&#39;s Wiki</title>
+    <link href="https://wiki.51itzone.cn/wiki/index/"/>
+    <id>https://wiki.51itzone.cn/wiki/index/</id>
+    <published>2018-08-20T02:17:49.255Z</published>
+    <updated>2018-08-20T02:17:49.256Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是 Javmain 的个人 Wiki 站点，主要记录学习遇到知识点。</p><p>我一直觉得 <strong>知识不能碎片化，要结构化</strong>，于是希望寻找一种优雅的方式来管理我的知识。</p><p>先后了解或尝试过 OneNote、Evernote、Blog、Wiki 等方式，总结了一套觉得比较合理的知识获取吸收管理流程：</p><ol><li>通过网页、RSS、微信等网络渠道作为知识获取来源。</li><li>通过笔记系统（手写笔记、OneNote、Evernote）初步筛选有价值有针对性的信息，<strong>收藏</strong>信息，<strong>分类整理</strong>，做读后<strong>要点</strong>笔记记录。</li><li>自己平时突然想到或总结的一两句话，或很零碎的点子、灵感，初步消化的内容，则用 <strong>Wiki</strong> 记录。</li><li>最后当 Wiki 在某版块有一定量后，将这方面笔记和 Wiki 中的内容重读，整理和提炼，二次消化精炼再加上自己的感悟和理解，写成文章发表在 <strong>博客</strong> 上。</li></ol><p>在使用中，<strong>笔记系统</strong> 主大块信息的<strong>分类和整理</strong>，<strong>Wiki</strong> 主零碎知识的<strong>积累</strong>，而 <strong>博客</strong> 只在于 <strong>精</strong>。</p><p>Wiki 中某一版块刚建时，可能只有很少内容或者就一句话，但是通过这种使用流程，日积月累，这方面的事物接触得多了，零散的知识也就多了，那么 Wiki 中这个版块记录的内容也就会变多了，也就是<strong>通过积累，把原本大量碎片化的知识结构化整理起来了</strong>。</p><p>博客的目的是 <strong>分享和展示</strong>，分享自己的知识，展示自己的水平，需要放拿得出手的东西，因此不适合放碎片化的只言片语，更适合放 <strong>一个系列</strong> 的总结或者教程等，是一个十分成体系的知识平台。</p><p>欢迎大家访问我的博客 <a href="https://blog.51itzone.cn" target="_blank" rel="noopener">Javmain’s Blog</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这是 Javmain 的个人 Wiki 站点，主要记录学习遇到知识点。&lt;/p&gt;
+&lt;p&gt;我一直觉得 &lt;strong&gt;知识不能碎片化，要结构化&lt;/strong&gt;，于是希望寻找一种优雅的方式来管理我的知识。&lt;/p&gt;
+&lt;p&gt;先后了解或尝试过 OneNote、Evernote、Blo
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>线性代数基础</title>
+    <link href="https://wiki.51itzone.cn/wiki/MachineLeaning/math/LinearAlgebra/LinearAlgebraBasic/"/>
+    <id>https://wiki.51itzone.cn/wiki/MachineLeaning/math/LinearAlgebra/LinearAlgebraBasic/</id>
+    <published>2018-08-20T02:17:49.255Z</published>
+    <updated>2018-08-27T07:31:17.900Z</updated>
+    
+    <content type="html"><![CDATA[<p>线性代数是现代数学的基础之一，在物理、计算机图形学、工程、经济学等自然科学和社会科学各领域具有广泛和深刻的应用，同时线性代数是高等学校理工科各专业的一门重要基础课。本课程介绍求解线性方程组、矩阵理论、向量空间和线性变换等线性代数的基本概念和基本理论，强调线性代数的理论与应用的结合。通过本课程的学习，培养学生的数学逻辑思维和抽象思维能力，使学生具备线性代数的基本理论知识，熟练掌握求解线性方程组和矩阵运算、矩阵分解的基本方法，掌握英文数学术语和表达规范，为后继的学习和提高奠定数学基础。</p><p>线性代数(1)围绕求解线性方程组，介绍高斯消元法、矩阵的性质运算和分解、向量空间、正交投影与最小二乘法、行列式的性质与计算、特征值特征向量与矩阵对角化、实对称矩阵的性质等基本知识点。线性代数(1)的知识模块顺序为</p><h1 id="向量及其运算简介"><a href="#向量及其运算简介" class="headerlink" title="向量及其运算简介"></a>向量及其运算简介</h1><h1 id="矩阵和线性方程组"><a href="#矩阵和线性方程组" class="headerlink" title="矩阵和线性方程组"></a>矩阵和线性方程组</h1><h1 id="高斯消元法"><a href="#高斯消元法" class="headerlink" title="高斯消元法"></a>高斯消元法</h1><h1 id="矩阵的运算"><a href="#矩阵的运算" class="headerlink" title="矩阵的运算"></a>矩阵的运算</h1><h1 id="矩阵的逆"><a href="#矩阵的逆" class="headerlink" title="矩阵的逆"></a>矩阵的逆</h1><h1 id="LU分解"><a href="#LU分解" class="headerlink" title="LU分解"></a>LU分解</h1><h1 id="向量空间"><a href="#向量空间" class="headerlink" title="向量空间"></a>向量空间</h1><h1 id="求解齐次线性方程组"><a href="#求解齐次线性方程组" class="headerlink" title="求解齐次线性方程组"></a>求解齐次线性方程组</h1><h1 id="求解非齐次线性方程组"><a href="#求解非齐次线性方程组" class="headerlink" title="求解非齐次线性方程组"></a>求解非齐次线性方程组</h1><h1 id="线性无关、基与维数"><a href="#线性无关、基与维数" class="headerlink" title="线性无关、基与维数"></a>线性无关、基与维数</h1><h1 id="四个基本子空间的基和维数"><a href="#四个基本子空间的基和维数" class="headerlink" title="四个基本子空间的基和维数"></a>四个基本子空间的基和维数</h1><h1 id="四个基本子空间的正交关系"><a href="#四个基本子空间的正交关系" class="headerlink" title="四个基本子空间的正交关系"></a>四个基本子空间的正交关系</h1><h1 id="正交投影"><a href="#正交投影" class="headerlink" title="正交投影"></a>正交投影</h1><h1 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h1><h1 id="Gram-Schmidt正交化"><a href="#Gram-Schmidt正交化" class="headerlink" title="Gram-Schmidt正交化"></a>Gram-Schmidt正交化</h1><h1 id="行列式的基本性质"><a href="#行列式的基本性质" class="headerlink" title="行列式的基本性质"></a>行列式的基本性质</h1><h1 id="行列式的计算"><a href="#行列式的计算" class="headerlink" title="行列式的计算"></a>行列式的计算</h1><h1 id="Cramer法则及行列式的几何意义"><a href="#Cramer法则及行列式的几何意义" class="headerlink" title="Cramer法则及行列式的几何意义"></a>Cramer法则及行列式的几何意义</h1><h1 id="特征值与特征向量"><a href="#特征值与特征向量" class="headerlink" title="特征值与特征向量"></a>特征值与特征向量</h1><h1 id="矩阵的对角化"><a href="#矩阵的对角化" class="headerlink" title="矩阵的对角化"></a>矩阵的对角化</h1><h1 id="在微分方程中的应用"><a href="#在微分方程中的应用" class="headerlink" title="在微分方程中的应用"></a>在微分方程中的应用</h1><h1 id="实对称矩阵"><a href="#实对称矩阵" class="headerlink" title="实对称矩阵"></a>实对称矩阵</h1><blockquote><p>课程参考书有以下几本，其中第一本可做教材：</p><p>（1）Gilbert Strang, Introduction to linear algebra, Fourth Edition, Wellesley-Cambridge Press, 2009.</p><p>（2）G. Strang, 线性代数及其应用， 侯自新、郑仲三、张延伦译，南开大学出版社，1990.</p><p>（3）David C. Lay, Linear Algebra and Its Applications, 机械工业出版社， 2004；中文版：线性代数及其应用（第3版），机械工业出版社，2005.</p><p>（4）Carl D. Meyer, Matrix Analysis and Applied Linear Algebra, SIAM.</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;线性代数是现代数学的基础之一，在物理、计算机图形学、工程、经济学等自然科学和社会科学各领域具有广泛和深刻的应用，同时线性代数是高等学校理工科各专业的一门重要基础课。本课程介绍求解线性方程组、矩阵理论、向量空间和线性变换等线性代数的基本概念和基本理论，强调线性代数的理论与应用
+      
+    
+    </summary>
+    
+      <category term="MachineLeaning" scheme="https://wiki.51itzone.cn/categories/MachineLeaning/"/>
+    
+      <category term="math" scheme="https://wiki.51itzone.cn/categories/MachineLeaning/math/"/>
+    
+      <category term="LinearAlgebra" scheme="https://wiki.51itzone.cn/categories/MachineLeaning/math/LinearAlgebra/"/>
+    
+    
+  </entry>
+  
+</feed>
