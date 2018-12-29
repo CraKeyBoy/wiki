@@ -17,7 +17,8 @@
 <meta property="og:description" content="Git介绍 Git是分布式版本控制系统 集中式VS分布式，SVN VS Git SVN 和 Git 主要的区别在于历史版本维护的位置 Git 本地仓库包含代码库还有历史库，在本地的环境开发就可以记录历史而SVN的历史库存在于中央仓库，每次对比与提交代码都必须连接到中央仓库才能进行。 这样的好处在于：   自己可以在脱机环境查看开发的版本历史。 多人开发时如果充当中央仓库的 Git 仓库挂了，可以随">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://wiki.51itzone.cn/wiki/BasicSkills/GitNotes/git-workspace.jpeg">
-<meta property="og:updated_time" content="2018-10-10T08:28:18.767Z">
+<meta property="og:image" content="https://wiki.51itzone.cn/wiki/BasicSkills/GitNotes/git-branch-dev.jpeg">
+<meta property="og:updated_time" content="2018-12-29T08:14:09.816Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git 笔记">
 <meta name="twitter:description" content="Git介绍 Git是分布式版本控制系统 集中式VS分布式，SVN VS Git SVN 和 Git 主要的区别在于历史版本维护的位置 Git 本地仓库包含代码库还有历史库，在本地的环境开发就可以记录历史而SVN的历史库存在于中央仓库，每次对比与提交代码都必须连接到中央仓库才能进行。 这样的好处在于：   自己可以在脱机环境查看开发的版本历史。 多人开发时如果充当中央仓库的 Git 仓库挂了，可以随">
@@ -177,7 +178,7 @@ var _hmt = _hmt || [];
                             &nbsp;
                             DataStructure
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/Algorithm/DataStructure/data-structure/">数据结构基本概念</a></li>  <li class="file"><a href="/wiki/Algorithm/DataStructure/stcak-and-queue/">栈和队列</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/Algorithm/DataStructure/stcak-and-queue/">栈和队列</a></li>  <li class="file"><a href="/wiki/Algorithm/DataStructure/data-structure/">数据结构基本概念</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -214,6 +215,15 @@ var _hmt = _hmt || [];
                             Kafka
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/BigData/Kafka/kafka/"></a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Zookeeper
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/BigData/Zookeeper/ZooKeeper/">zookeeper 详解</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -476,6 +486,9 @@ var _hmt = _hmt || [];
 <h4 id="推送到远程仓库"><a href="#推送到远程仓库" class="headerlink" title="推送到远程仓库"></a>推送到远程仓库</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
 <p><code>-u</code> 表示第一次推送 master 分支的所有内容，此后，每次本地提交后，只要有必要，就可以使用命令 <code>git push origin master</code> 推送最新修改。</p>
 <h4 id="从远程克隆"><a href="#从远程克隆" class="headerlink" title="从远程克隆"></a>从远程克隆</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/usern/repositoryname.git</span><br></pre></td></tr></table></figure>
+<h4 id="修改远程仓库地址"><a href="#修改远程仓库地址" class="headerlink" title="修改远程仓库地址"></a>修改远程仓库地址</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">set</span>-url origin https://github.com/usern/repositoryname.git</span><br></pre></td></tr></table></figure>
+<p>或先删除后加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin</span><br><span class="line">git remote add origin https://github.com/usern/repositoryname.git</span><br></pre></td></tr></table></figure>
 <h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><h4 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch &lt;branchname&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
 <p><code>git branch</code> 命令会列出所有分支，当前分支前面会标一个 * 号。</p>
@@ -499,6 +512,7 @@ var _hmt = _hmt || [];
 <p>如果推送失败，先用 git pull抓取远程的新提交；</p>
 <h4 id="从远程抓取分支"><a href="#从远程抓取分支" class="headerlink" title="从远程抓取分支"></a>从远程抓取分支</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
 <p>如果有冲突，要先处理冲突。</p>
+<h4 id="Github-fork-出来的分支与主库保持同步"><a href="#Github-fork-出来的分支与主库保持同步" class="headerlink" title="Github fork 出来的分支与主库保持同步"></a>Github fork 出来的分支与主库保持同步</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git remote add upstream https://github.com/usern/repositoryname.git</span><br><span class="line">git fetch upstream</span><br><span class="line"></span><br><span class="line">git checkout master</span><br><span class="line">git merge upstream/master</span><br></pre></td></tr></table></figure>
 <h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><p>tag 就是一个让人容易记住的有意义的名字，它跟某个 commit 绑在一起。</p>
 <h4 id="新建一个标签"><a href="#新建一个标签" class="headerlink" title="新建一个标签"></a>新建一个标签</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag &lt;tagname&gt;</span><br></pre></td></tr></table></figure>
 <p>命令<code>git tag &lt;tagname&gt;</code>用于新建一个标签，默认为HEAD，也可以指定一个 commit id。</p>
@@ -511,6 +525,7 @@ var _hmt = _hmt || [];
 <h4 id="推送全部未推送过的本地标签"><a href="#推送全部未推送过的本地标签" class="headerlink" title="推送全部未推送过的本地标签"></a>推送全部未推送过的本地标签</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure>
 <h4 id="删除一个本地标签"><a href="#删除一个本地标签" class="headerlink" title="删除一个本地标签"></a>删除一个本地标签</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d &lt;tagname&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="删除一个远程标签"><a href="#删除一个远程标签" class="headerlink" title="删除一个远程标签"></a>删除一个远程标签</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin :refs/tags/&lt;tagname&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="git-分支开发最佳实践"><a href="#git-分支开发最佳实践" class="headerlink" title="git 分支开发最佳实践"></a>git 分支开发最佳实践</h3><p><img src="git-branch-dev.jpeg" alt="git-branch-dev"></p>
 
             </div>
         

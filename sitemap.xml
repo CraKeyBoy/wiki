@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://wiki.51itzone.cn/wiki/Algorithm/DataStructure/data-structure/</loc>
+    <loc>https://wiki.51itzone.cn/wiki/BasicSkills/GitNotes/</loc>
     
-    <lastmod>2018-10-10T08:29:10.867Z</lastmod>
+    <lastmod>2018-12-29T08:14:09.816Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wiki.51itzone.cn/wiki/BigData/Zookeeper/ZooKeeper/</loc>
+    
+    <lastmod>2018-12-29T07:58:09.209Z</lastmod>
     
   </url>
   
@@ -16,9 +23,9 @@
   </url>
   
   <url>
-    <loc>https://wiki.51itzone.cn/wiki/BasicSkills/GitNotes/</loc>
+    <loc>https://wiki.51itzone.cn/wiki/Algorithm/DataStructure/data-structure/</loc>
     
-    <lastmod>2018-10-10T08:28:18.767Z</lastmod>
+    <lastmod>2018-10-10T08:29:10.867Z</lastmod>
     
   </url>
   
