@@ -3,20 +3,23 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Javmain&#39;s Wiki</title>
+    <title>kafka 详解 | Javmain&#39;s Wiki</title>
     
     
-        <meta name="keywords" content="Javmain&#39;s Wiki">
+        <meta name="keywords" content="kafka 详解">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta property="og:type" content="article">
-<meta property="og:title" content="Javmain&#39;s Wiki">
+    <meta name="description" content="kafka 应用场景kafka 作为时下最流行的开源消息系统，被广泛地应用在数据缓冲、异步通信、汇集日志、系统解耦等方面 kafka 如何实现每秒几十万的高并发写入Kafka 是高吞吐低延迟的高并发、高性能的消息中间件，在大数据领域有极为广泛的运用。配置良好的 Kafka 集群甚至可以做到每秒几十万、上百万的超高并发读取和写入。 页面缓存技术kafka 为了保证数据写入性能，基于操作系统的页缓存（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kafka 详解">
 <meta property="og:url" content="https://wiki.51itzone.cn/wiki/BigData/Kafka/kafka/index.html">
 <meta property="og:site_name" content="Javmain&#39;s Wiki">
+<meta property="og:description" content="kafka 应用场景kafka 作为时下最流行的开源消息系统，被广泛地应用在数据缓冲、异步通信、汇集日志、系统解耦等方面 kafka 如何实现每秒几十万的高并发写入Kafka 是高吞吐低延迟的高并发、高性能的消息中间件，在大数据领域有极为广泛的运用。配置良好的 Kafka 集群甚至可以做到每秒几十万、上百万的超高并发读取和写入。 页面缓存技术kafka 为了保证数据写入性能，基于操作系统的页缓存（">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-20T11:20:20.684Z">
+<meta property="og:updated_time" content="2019-03-07T06:10:21.339Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Javmain&#39;s Wiki">
+<meta name="twitter:title" content="kafka 详解">
+<meta name="twitter:description" content="kafka 应用场景kafka 作为时下最流行的开源消息系统，被广泛地应用在数据缓冲、异步通信、汇集日志、系统解耦等方面 kafka 如何实现每秒几十万的高并发写入Kafka 是高吞吐低延迟的高并发、高性能的消息中间件，在大数据领域有极为广泛的运用。配置良好的 Kafka 集群甚至可以做到每秒几十万、上百万的超高并发读取和写入。 页面缓存技术kafka 为了保证数据写入性能，基于操作系统的页缓存（">
     
 
     
@@ -208,7 +211,7 @@ var _hmt = _hmt || [];
                             &nbsp;
                             Kafka
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file active"><a href="/wiki/BigData/Kafka/kafka/"></a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file active"><a href="/wiki/BigData/Kafka/kafka/">kafka 详解</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -359,6 +362,51 @@ var _hmt = _hmt || [];
     <div class="article-inner">
         
         
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/BigData/">BigData</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/BigData/Kafka/">Kafka</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/BigData/Kafka/kafka/">
+            <time datetime="2018-08-20T02:17:49.257Z" itemprop="datePublished">2018-08-20</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/javmain/wiki-site/raw/master/source/_posts/BigData/Kafka/kafka.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/javmain/wiki-site/edit/master/source/_posts/BigData/Kafka/kafka.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/javmain/wiki-site/commits/master/source/_posts/BigData/Kafka/kafka.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            kafka 详解
+        </h1>
+    
+
+            </header>
+        
         
         <div class="article-entry" itemprop="articleBody">
         
@@ -366,7 +414,16 @@ var _hmt = _hmt || [];
             
         
         
-            
+            <h1 id="kafka-应用场景"><a href="#kafka-应用场景" class="headerlink" title="kafka 应用场景"></a>kafka 应用场景</h1><p>kafka 作为时下最流行的开源消息系统，被广泛地应用在数据缓冲、异步通信、汇集日志、系统解耦等方面</p>
+<h1 id="kafka-如何实现每秒几十万的高并发写入"><a href="#kafka-如何实现每秒几十万的高并发写入" class="headerlink" title="kafka 如何实现每秒几十万的高并发写入"></a>kafka 如何实现每秒几十万的高并发写入</h1><p>Kafka 是高吞吐低延迟的高并发、高性能的消息中间件，在大数据领域有极为广泛的运用。配置良好的 Kafka 集群甚至可以做到每秒几十万、上百万的超高并发读取和写入。</p>
+<h2 id="页面缓存技术"><a href="#页面缓存技术" class="headerlink" title="页面缓存技术"></a>页面缓存技术</h2><p>kafka 为了保证数据写入性能，基于操作系统的页缓存（page cache 为了处理块设备和内存交互时高速访问的问题）来实现文件写入。</p>
+<h2 id="磁盘顺序写"><a href="#磁盘顺序写" class="headerlink" title="磁盘顺序写"></a>磁盘顺序写</h2><h2 id="零拷贝技术"><a href="#零拷贝技术" class="headerlink" title="零拷贝技术"></a>零拷贝技术</h2><blockquote>
+<p>参考资料</p>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cache/index.html" rel="external nofollow noopener noreferrer" target="_blank">Linux 内核的文件 Cache 管理机制介绍</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Page_cache" rel="external nofollow noopener noreferrer" target="_blank">Page Cache</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/35277219" rel="external nofollow noopener noreferrer" target="_blank">Linux系统中的Page cache和Buffer cache</a></p>
+</blockquote>
+
             </div>
         
         <footer class="article-footer">
@@ -413,7 +470,7 @@ var _hmt = _hmt || [];
         <footer id="footer">
     <div class="outer">
         <div id="footer-info" class="inner">
-            Javmain &copy; 2018 
+            Javmain &copy; 2019 
             <a rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
             <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
             

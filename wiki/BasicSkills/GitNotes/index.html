@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://wiki.51itzone.cn/wiki/BasicSkills/GitNotes/git-workspace.jpeg">
 <meta property="og:image" content="https://wiki.51itzone.cn/wiki/BasicSkills/GitNotes/git-branch-dev.jpeg">
-<meta property="og:updated_time" content="2018-12-29T08:14:09.816Z">
+<meta property="og:updated_time" content="2018-12-29T08:38:11.290Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git 笔记">
 <meta name="twitter:description" content="Git介绍 Git是分布式版本控制系统 集中式VS分布式，SVN VS Git SVN 和 Git 主要的区别在于历史版本维护的位置 Git 本地仓库包含代码库还有历史库，在本地的环境开发就可以记录历史而SVN的历史库存在于中央仓库，每次对比与提交代码都必须连接到中央仓库才能进行。 这样的好处在于：   自己可以在脱机环境查看开发的版本历史。 多人开发时如果充当中央仓库的 Git 仓库挂了，可以随">
@@ -214,7 +214,7 @@ var _hmt = _hmt || [];
                             &nbsp;
                             Kafka
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/BigData/Kafka/kafka/"></a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/BigData/Kafka/kafka/">kafka 详解</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -526,7 +526,17 @@ var _hmt = _hmt || [];
 <h4 id="删除一个本地标签"><a href="#删除一个本地标签" class="headerlink" title="删除一个本地标签"></a>删除一个本地标签</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d &lt;tagname&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="删除一个远程标签"><a href="#删除一个远程标签" class="headerlink" title="删除一个远程标签"></a>删除一个远程标签</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin :refs/tags/&lt;tagname&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="git-分支开发最佳实践"><a href="#git-分支开发最佳实践" class="headerlink" title="git 分支开发最佳实践"></a>git 分支开发最佳实践</h3><p><img src="git-branch-dev.jpeg" alt="git-branch-dev"></p>
-
+<h3 id="子模块-submodule"><a href="#子模块-submodule" class="headerlink" title="子模块 submodule"></a>子模块 submodule</h3><p><code>git Submodule</code> 是一个很好的多项目使用共同类库的工具，他允许类库项目做为 <code>repository</code> ,子项目做为一个单独的  <code>git</code> 项目存在父项目中，子项目可以有自己的独立的<code>commit</code>，<code>push</code>，<code>pull</code>。而父项目以<code>Submodule</code>的形式包含子项目，父项目可以指定子项目 <code>header</code> ，父项目中会的提交信息包含 <code>Submodule</code> 的信息，再 <code>clone</code> 父项目的时候可以把 <code>Submodule</code> 初始化。</p>
+<h4 id="添加-Submodule"><a href="#添加-Submodule" class="headerlink" title="添加 Submodule"></a>添加 Submodule</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule add git@github.com:usern/repositoryname.git folder</span><br></pre></td></tr></table></figure>
+<h4 id="更新-Submodule"><a href="#更新-Submodule" class="headerlink" title="更新 Submodule"></a>更新 Submodule</h4><p>在父目录下更新</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule foreach git pull</span><br></pre></td></tr></table></figure>
+<p>在 <code>Submodule</code> 目录下更新</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> folder</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
+<h4 id="克隆含有子模块的项目"><a href="#克隆含有子模块的项目" class="headerlink" title="克隆含有子模块的项目"></a>克隆含有子模块的项目</h4><p>采用递归参数 <code>--recursive</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:usern/repositoryname.git --recursive</span><br></pre></td></tr></table></figure>
+<p>先 clone 父目录，再初始化 Submodule</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:usern/repositoryname.git</span><br><span class="line"><span class="built_in">cd</span> repositoryname</span><br><span class="line">git submodule init</span><br><span class="line">git submodule init</span><br></pre></td></tr></table></figure>
+<h4 id="删除-Submodule"><a href="#删除-Submodule" class="headerlink" title="删除 Submodule"></a>删除 Submodule</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached repositoryname</span><br><span class="line">rm -rf repositoryname</span><br><span class="line">rm .gitmodules</span><br><span class="line">git commit -a -m <span class="string">'remove repositoryname submodule'</span></span><br></pre></td></tr></table></figure>
             </div>
         
         <footer class="article-footer">
@@ -573,7 +583,7 @@ var _hmt = _hmt || [];
         <footer id="footer">
     <div class="outer">
         <div id="footer-info" class="inner">
-            Javmain &copy; 2018 
+            Javmain &copy; 2019 
             <a rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
             <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
             
